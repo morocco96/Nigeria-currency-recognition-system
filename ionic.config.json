@@ -1,0 +1,7 @@
+{
+  "name": "nigeria-currency-recognition-system",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
