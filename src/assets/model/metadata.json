@@ -1,0 +1,19 @@
+{
+    "tfjsVersion": "1.7.4",
+    "tmVersion": "2.4.12",
+    "packageVersion": "0.8.4-alpha2",
+    "packageName": "@teachablemachine/image",
+    "timeStamp": "2026-03-07T05:33:21.146Z",
+    "userMetadata": {},
+    "modelName": "tm-my-image-model",
+    "labels": [
+        "naira_5",
+        "naira_10",
+        "naira_50",
+        "naira_100",
+        "niara_200",
+        "naira_500",
+        "naira_1000"
+    ],
+    "imageSize": 224
+}
