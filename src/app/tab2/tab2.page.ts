@@ -45,4 +45,12 @@ await TextToSpeech.speak({
 
 }
 
+
+async speak() {
+  await TextToSpeech.speak({
+    text: "Hello this is a test Habib Yakubu",
+    lang: "en-US"
+  });
+
+}
 }
