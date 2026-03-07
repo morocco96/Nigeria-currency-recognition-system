@@ -48,7 +48,7 @@ await TextToSpeech.speak({
 
 async speak() {
   await TextToSpeech.speak({
-    text: "Hello this is a test Habib Yakubu",
+    text: `This is ${this.result} Naira`,
     lang: "en-US"
   });
 
