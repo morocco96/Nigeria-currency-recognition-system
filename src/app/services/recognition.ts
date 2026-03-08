@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import * as tmImage from '@teachablemachine/image';
+
 
 @Injectable({
   providedIn: 'root',
