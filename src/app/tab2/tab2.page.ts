@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Camera, CameraResultType } from '@capacitor/camera';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['tab2.page.scss'],
   imports: [IonHeader, IonButton, IonToolbar, IonTitle, IonContent,  CommonModule]
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   
   image:any;
@@ -24,21 +24,31 @@ private recognition:Recognition,
 
 ){}
 
+async ngOnInit() {
+  await this.recognition.loadModel();
+}
+
+
 async scanMoney(){
 
 const photo = await Camera.getPhoto({
 quality:90,
-resultType:CameraResultType.DataUrl
+resultType:CameraResultType.DataUrl,
+  width: 224,
+  height: 224
 });
 
 this.image = photo.dataUrl;
 
-this.result = await this.recognition.detect(photo.dataUrl);
+const image = await this.createImage(photo.dataUrl!);
+this.result = await this.recognition.detect(image);
+
+console.log(this.result)
 
 
 
 await TextToSpeech.speak({
-  text: `This is ${this.result} Naira`,
+  text: `This is ${this.result}`,
   lang: 'en-US',
   rate: 1.0
 });
@@ -46,9 +56,18 @@ await TextToSpeech.speak({
 }
 
 
+createImage(dataUrl: string): Promise<HTMLImageElement> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = dataUrl;
+    img.onload = () => resolve(img);
+  });
+}
+
+
 async speak() {
   await TextToSpeech.speak({
-    text: `This is ${this.result} Naira`,
+    text: `This is ${this.result}`,
     lang: "en-US"
   });
 

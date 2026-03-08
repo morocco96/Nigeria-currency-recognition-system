@@ -1,39 +1,47 @@
 import { Injectable } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
+import * as tmImage from '@teachablemachine/image';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Recognition {
   
-  model:any;
+ model: any;
 
-async loadModel(){
-this.model = await tf.loadLayersModel('assets/model/naira-model.json');
+async loadModel() {
+
+this.model = await tf.loadLayersModel('assets/model/model.json')
+console.log("Model loaded:", this.model);
 }
 
-async detect(image:any){
+async detect(image: HTMLImageElement) {
 
-// convert image to tensor
 const tensor = tf.browser.fromPixels(image)
-.resizeNearestNeighbor([224,224])
-.expandDims();
+.resizeBilinear([224,224])
+.toFloat()
+.div(255)
+.expandDims(0);
 
-const prediction = await this.model.predict(tensor).data();
+const prediction = this.model.predict(tensor) as any;
 
-const classes = [
-"₦5",
-"₦10",
-"₦50",
-"₦100",
-"₦200",
-"₦500",
-"₦1000"
+const data = await prediction.data();
+
+console.log("Prediction:", data);
+
+const labels = [
+"5 Naira",
+"10 Naira",
+"50 Naira",
+"100 Naira",
+"200 Naira",
+"500 Naira",
+"1000 Naira"
 ];
 
-const index = prediction.indexOf(Math.max(...prediction));
+const maxIndex = data.indexOf(Math.max(...data));
 
-return classes[index];
+return labels[maxIndex];
 
 }
 }
