@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, 
+  IonIcon,IonList, IonItem, IonThumbnail, IonLabel} from '@ionic/angular/standalone';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { Recognition } from '../services/recognition';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
@@ -11,7 +11,9 @@ import { CommonModule } from '@angular/common';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader, IonButton, IonToolbar, IonTitle, IonContent,  CommonModule]
+  imports: [IonHeader, IonToolbar, IonTitle, 
+    IonContent,  IonIcon, IonItem, IonThumbnail, IonList,
+    IonLabel, CommonModule]
 })
 export class Tab2Page implements OnInit {
 
