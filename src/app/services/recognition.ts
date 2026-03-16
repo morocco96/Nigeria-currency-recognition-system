@@ -32,6 +32,7 @@ console.log("Prediction:", data);
 const labels = [
 "5 Naira",
 "10 Naira",
+"20 Naira",
 "50 Naira",
 "100 Naira",
 "200 Naira",

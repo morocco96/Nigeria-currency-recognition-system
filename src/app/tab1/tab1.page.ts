@@ -16,6 +16,7 @@ export class Tab1Page implements OnInit {
   
    image:any;
  result:any;
+  speechText = "";
  
  constructor(
  private recognition:Recognition,
@@ -43,10 +44,16 @@ export class Tab1Page implements OnInit {
  
  console.log(this.result)
  
- 
+
+
+ if(!this.result){
+   this.speechText = "I couldn't recognize the currency. Please scan again.";
+ }else{
+   this.speechText = `This is ${this.result}`;
+ }
  
  await TextToSpeech.speak({
-   text: `This is ${this.result}`,
+   text: this.speechText,
    lang: 'en-US',
    rate: 1.0
  });
@@ -56,7 +63,7 @@ export class Tab1Page implements OnInit {
 
  async speak() {
    await TextToSpeech.speak({
-   text: `This is ${this.result}`,
+   text: this.speechText,
    lang: 'en-US',
    rate: 1.0
  });
